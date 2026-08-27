@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { HashScrollOnLoad } from "@/components/hash-scroll-on-load";
+import { SiteHeader } from "@/components/site-header";
 import { SiteBackground } from "@/components/ui/background-components";
 import "./globals.css";
 
@@ -70,7 +72,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${ft88.variable} ${ft88School.variable} ${ppNeueBit.variable} ${urbanist.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <SiteBackground>{children}</SiteBackground>
+        <SiteBackground>
+          <SiteHeader />
+          <HashScrollOnLoad />
+          {children}
+        </SiteBackground>
       </body>
     </html>
   );

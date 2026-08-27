@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { AnimatedNavigationTabs } from "@/components/ui/animated-navigation-tabs";
+import { ContactCardFooter } from "@/components/contact-card-footer";
+import { FluidTooltip } from "@/components/fluid-tooltip";
 import AnimatedHighlightText, {
   HeartIcon,
   Highlight,
@@ -10,51 +10,39 @@ import AnimatedHighlightText, {
   SparklesIcon,
 } from "@/components/ui/animated-highlight-text";
 
-import Work from "@/app/work/page"
-const NAV_ITEMS = [
-  { id: 1, tile: "Home", link: "/" },
-  { id: 2, tile: "Work", link: "/work" },
-  { id: 3, tile: "About", link: "#about" },
-  { id: 4, tile: "Contact", link: "#contact" },
-] as const;
+import { ProjectsFolderDesktop } from "@/components/projects-folder-desktop";
 
 const UNSPLASH = {
   built:
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop",
+    "/built-hero.png",
   loved:
-    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=200&fit=crop",
+    "/team-hero.jpg",
   polished:
-    "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=200&fit=crop",
+    "/polished-hero.png",
 } as const;
 
 export default function Home() {
   return (
     <main className="flex min-h-full flex-1 flex-col">
-      <header className="sticky top-0 z-50 p-3">
-        <div className="grid h-14 grid-cols-3 items-center">
-          <Link href="/" className="justify-start w-fit mt-[-0.25rem]" aria-label="Home">
-            <Image
-              src="/p-l.png"
-              alt="Shamita"
-              width={100}
-              height={100}
-              className="size-20 object-contain"
-              priority
-            />
-          </Link>
-          <div className="flex justify-center">
-            <AnimatedNavigationTabs items={[...NAV_ITEMS]} />
-          </div>
-          <div aria-hidden="true" />
-        </div>
-      </header>
-
-      <div className="flex min-h-[420px] w-full min-h-screen flex-1 items-center justify-center">
-        <AnimatedHighlightText className="text-center mt-[-2rem]">
+      <div className="flex min-h-screen w-full flex-1 flex-col items-center justify-center px-8 mt-[-6rem]">
+        <FluidTooltip
+          className="mb-6"
+          text="smiski says hi >.< freshly graduated and ready to build!"
+        >
+          <Image
+            src="/smiski-grad.png"
+            alt="Smiski Grad"
+            width={100}
+            height={100}
+            className="object-contain"
+          />
+        </FluidTooltip>
+        <AnimatedHighlightText className="text-center">
           Hi! I'm Shamita. I design and build intuitive{" "}
           <Highlight
             icon={<MousePointerClickIcon />}
             image={UNSPLASH.built}
+            color="#5b91c7"
             imageAlt="Built — developer workspace"
           >
             interfaces
@@ -68,21 +56,21 @@ export default function Home() {
           >
             teams
           </Highlight>
-          , and create{" "}
+          , and sip{" "}
           <Highlight
             icon={<SparklesIcon />}
+            color="#54b06d"
             image={UNSPLASH.polished}
             imageAlt="Polished — design workspace"
           >
-            videos
+            matcha
           </Highlight>{" "}
           on the side.
         </AnimatedHighlightText>
       </div>
 
-      <div>
-        <Work/>
-      </div>
+      <ProjectsFolderDesktop />
+      <ContactCardFooter />
     </main>
   );
 }

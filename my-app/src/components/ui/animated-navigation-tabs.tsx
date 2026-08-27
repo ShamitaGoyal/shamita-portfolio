@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export type NavigationTabItem = {
@@ -17,22 +17,82 @@ type AnimatedNavigationTabsProps = {
   className?: string;
 };
 
+function getHash(link: string): string | null {
+  const hashIndex = link.indexOf("#");
+  if (hashIndex === -1) return null;
+  return link.slice(hashIndex);
+}
+
+function getPath(link: string): string {
+  const hashIndex = link.indexOf("#");
+  return hashIndex === -1 ? link : link.slice(0, hashIndex) || "/";
+}
+
+function resolveActiveItem(
+  items: NavigationTabItem[],
+  pathname: string,
+  hash: string,
+): NavigationTabItem {
+  const hashMatch = items.find((item) => {
+    const itemHash = getHash(item.link);
+    const itemPath = getPath(item.link);
+    return itemHash && itemPath === pathname && itemHash === hash;
+  });
+  if (hashMatch) return hashMatch;
+
+  const pathMatch = items.find((item) => getPath(item.link) === pathname && !getHash(item.link));
+  if (pathMatch) return pathMatch;
+
+  const routeMatch = items.find((item) => item.link === pathname);
+  if (routeMatch) return routeMatch;
+
+  return items[0];
+}
+
+function scrollToSection(hash: string) {
+  const id = hash.replace(/^#/, "");
+  const el = document.getElementById(id);
+  el?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 export function AnimatedNavigationTabs({
   items,
   className,
 }: AnimatedNavigationTabsProps) {
   const pathname = usePathname();
-  const [active, setActive] = useState<NavigationTabItem>(
-    () => items.find((item) => item.link === pathname) ?? items[0],
-  );
+  const [hash, setHash] = useState("");
+  const [active, setActive] = useState<NavigationTabItem>(() => items[0]);
   const [isHover, setIsHover] = useState<NavigationTabItem | null>(null);
 
   useEffect(() => {
-    const matched = items.find((item) => item.link === pathname);
-    if (matched) {
-      setActive(matched);
-    }
-  }, [pathname, items]);
+    const syncHash = () => setHash(window.location.hash);
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, []);
+
+  useEffect(() => {
+    setActive(resolveActiveItem(items, pathname, hash));
+  }, [pathname, hash, items]);
+
+  const handleClick = useCallback(
+    (item: NavigationTabItem, event: React.MouseEvent<HTMLAnchorElement>) => {
+      const itemHash = getHash(item.link);
+      const itemPath = getPath(item.link);
+
+      if (itemHash && itemPath === pathname) {
+        event.preventDefault();
+        window.history.pushState(null, "", itemHash);
+        setHash(itemHash);
+        setActive(item);
+        scrollToSection(itemHash);
+        return;
+      }
+
+      setActive(item);
+    },
+    [pathname],
+  );
 
   return (
     <div className={cn("relative", className)}>
@@ -47,7 +107,7 @@ export function AnimatedNavigationTabs({
                   ? "text-primary"
                   : "text-muted-foreground",
               )}
-              onClick={() => setActive(item)}
+              onClick={(event) => handleClick(item, event)}
               onMouseEnter={() => setIsHover(item)}
               onMouseLeave={() => setIsHover(null)}
             >

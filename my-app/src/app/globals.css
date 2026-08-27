@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -54,4 +64,24 @@ label[for],
 select,
 .cursor-pointer {
   cursor: url("/cursor-hand-svgrepo-com.svg") 12 8, pointer;
+}
+
+@keyframes float1 {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-4deg);
+  }
+}
+
+.animate-float1 {
+  animation: float1 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float1 {
+    animation: none;
+  }
 }

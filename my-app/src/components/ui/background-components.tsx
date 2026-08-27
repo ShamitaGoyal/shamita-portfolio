@@ -27,6 +27,7 @@ export function SiteBackground({ children, className }: SiteBackgroundProps) {
           mixBlendMode: "multiply",
         }}
       />
+
       <div className="relative z-10 flex min-h-screen flex-col">{children}</div>
     </div>
   );
