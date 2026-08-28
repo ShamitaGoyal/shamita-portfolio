@@ -16,11 +16,11 @@ import { BackgroundPixelStars } from "@/components/ui/background-pixel-stars";
 
 const UNSPLASH = {
   built:
-    "/images/built-hero.JPEG",
+    "/images/built-hero.webp",
   loved:
-    "/images/team-hero.jpg",
+    "/images/team-hero.webp",
   polished:
-    "/images/polished-hero.png",
+    "/images/polished-hero.webp",
 } as const;
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
           text="smiski says hi >.< freshly graduated and ready to build!"
         >
           <Image
-            src="/images/smiski-grad.png"
+            src="/images/smiski-grad.webp"
             alt="Smiski Grad"
             width={100}
             height={100}

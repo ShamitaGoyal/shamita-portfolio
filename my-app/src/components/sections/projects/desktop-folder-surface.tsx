@@ -11,10 +11,8 @@ import {
   Share,
   Tag,
 } from "lucide-react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
-import { FluidTooltip } from "@/components/ui/fluid-tooltip";
 import { cn } from "@/lib/utils";
 import { FolderIcon } from "@/components/sections/projects/folder-icon";
 import type { ProjectFolder } from "@/data/project-folders";
@@ -151,21 +149,6 @@ export function DesktopFolderSurface({
         ref={surfaceRef}
         className="relative min-h-[360px] bg-[#ececee] sm:min-h-[420px]"
       >
-        {/* <FluidTooltip
-          text="pssst...you can drag around the folders too"
-          side="top"
-          offset={8}
-          className="absolute right-2 top-0 z-10 -translate-y-[calc(100%-8px)] sm:right-[-50px] sm:top-[150px] sm:translate-y-0"
-        > */}
-          {/* <Image
-            src="/images/smiski-head.png"
-            alt="Smiski perched on the folder desktop"
-            width={160}
-            height={160}
-            className="h-auto w-[min(128px,26vw)] object-contain sm:w-[300px] bg-green-500 "
-          /> */}
-        {/* </FluidTooltip> */}
-
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 overflow-hidden"

@@ -39,7 +39,7 @@ export function ProjectsFolderDesktop({
           <div className="flex items-center justify-center lg:w-[42%] lg:-ml-6 lg:justify-end lg:pr-2">
             <FluidTooltip text="psssst...the folders are draggable! open a folder to see what I've built for each team.">
               <Image
-                src="/images/smiski.png"
+                src="/images/smiski.webp"
                 alt="Smiski with laptop"
                 width={360}
                 height={360}
