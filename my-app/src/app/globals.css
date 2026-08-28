@@ -30,29 +30,13 @@ html {
   --color-popover-foreground: var(--popover-foreground);
   --font-sans: var(--font-mondwest);
   --font-mono: var(--font-geist-mono);
-  --font-ft88: var(--font-ft88);
-  --font-ft88-school: var(--font-ft88-school);
-  --font-neuebit: var(--font-neuebit);
-  --font-urbanist: var(--font-urbanist);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #ededed;
-    --muted-foreground: #a3a3a3;
-    --border: #262626;
-    --popover: #171717;
-    --popover-foreground: #ededed;
-  }
 }
 
 body {
   background: transparent;
   color: var(--foreground);
   font-family: var(--font-mondwest), Arial, Helvetica, sans-serif;
-  cursor: url("/cursor-alt-svgrepo-com.svg") 5 5, auto;
+  cursor: url("/cursors/cursor-alt-svgrepo-com.svg") 5 5, auto;
 }
 
 a,
@@ -63,7 +47,7 @@ input[type="button"],
 label[for],
 select,
 .cursor-pointer {
-  cursor: url("/cursor-hand-svgrepo-com.svg") 12 8, pointer;
+  cursor: url("/cursors/cursor-hand-svgrepo-com.svg") 12 8, pointer;
 }
 
 @keyframes float1 {

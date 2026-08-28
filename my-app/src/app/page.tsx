@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ContactCardFooter } from "@/components/contact-card-footer";
-import { FluidTooltip } from "@/components/fluid-tooltip";
+import { ContactCardFooter } from "@/components/sections/contact-card-footer";
+import { FluidTooltip } from "@/components/ui/fluid-tooltip";
 import AnimatedHighlightText, {
   HeartIcon,
   Highlight,
@@ -10,34 +10,38 @@ import AnimatedHighlightText, {
   SparklesIcon,
 } from "@/components/ui/animated-highlight-text";
 
-import { ProjectsFolderDesktop } from "@/components/projects-folder-desktop";
+import { AboutSection } from "@/components/sections/about-section";
+import { ProjectsFolderDesktop } from "@/components/sections/projects/projects-folder-desktop";
+import { BackgroundPixelStars } from "@/components/ui/background-pixel-stars";
 
 const UNSPLASH = {
   built:
-    "/built-hero.png",
+    "/images/built-hero.JPEG",
   loved:
-    "/team-hero.jpg",
+    "/images/team-hero.jpg",
   polished:
-    "/polished-hero.png",
+    "/images/polished-hero.png",
 } as const;
 
 export default function Home() {
   return (
     <main className="flex min-h-full flex-1 flex-col">
-      <div className="flex min-h-screen w-full flex-1 flex-col items-center justify-center px-8 mt-[-6rem]">
+      <div className="relative flex min-h-screen w-full flex-1 flex-col items-center justify-center px-8 mt-[-6rem]">
+        <BackgroundPixelStars className="pointer-events-none absolute inset-0 z-0" />
+
         <FluidTooltip
-          className="mb-6"
+          className="relative z-10 mb-6"
           text="smiski says hi >.< freshly graduated and ready to build!"
         >
           <Image
-            src="/smiski-grad.png"
+            src="/images/smiski-grad.png"
             alt="Smiski Grad"
             width={100}
             height={100}
             className="object-contain"
           />
         </FluidTooltip>
-        <AnimatedHighlightText className="text-center">
+        <AnimatedHighlightText className="relative z-10 text-center">
           Hi! I'm Shamita. I design and build intuitive{" "}
           <Highlight
             icon={<MousePointerClickIcon />}
@@ -70,6 +74,7 @@ export default function Home() {
       </div>
 
       <ProjectsFolderDesktop />
+      <AboutSection />
       <ContactCardFooter />
     </main>
   );

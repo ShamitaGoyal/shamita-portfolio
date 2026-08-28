@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { FluidTooltip } from "@/components/fluid-tooltip";
+import { FluidTooltip } from "@/components/ui/fluid-tooltip";
 import { cn } from "@/lib/utils";
-import { DesktopFolderSurface } from "@/components/ui/desktop-folder-surface";
-import { FinderWindow } from "@/components/ui/finder-window";
+import { DesktopFolderSurface } from "@/components/sections/projects/desktop-folder-surface";
+import { FinderWindow } from "@/components/sections/projects/finder-window";
 import {
   PROJECT_FOLDERS,
   getProjectFolder,
@@ -24,22 +24,22 @@ export function ProjectsFolderDesktop({
   const openFolder = openFolderId ? getProjectFolder(openFolderId) : null;
 
   return (
-    <section id={id} className={cn("scroll-mt-20 w-full px-8 py-20", className)}>
+    <section id={id} className={cn("scroll-mt-20 w-full px-8 py-20 ", className)}>
       <div className="mx-auto max-w-5xl">
         <div className="mb-10 text-center">
           <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-6xl">
             Projects
           </h2>
-          <p className="mt-2 text-xl text-muted-foreground">
+          <p className="mt-2 text-xl text-muted-foreground mt-3">
             Open a folder to explore work by organization.
           </p>
         </div>
 
         <div className="mt-6 flex flex-col gap-10 lg:flex-row lg:items-stretch lg:gap-12">
           <div className="flex items-center justify-center lg:w-[42%] lg:-ml-6 lg:justify-end lg:pr-2">
-            <FluidTooltip text="these are my projects! open a folder to see what I've built for each team.">
+            <FluidTooltip text="psssst...the folders are draggable! open a folder to see what I've built for each team.">
               <Image
-                src="/smiski.png"
+                src="/images/smiski.png"
                 alt="Smiski with laptop"
                 width={360}
                 height={360}

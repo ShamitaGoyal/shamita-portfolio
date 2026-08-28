@@ -6,11 +6,11 @@ import { cn } from "@/lib/utils";
 import {
   ProjectHoverPreview,
   type ProjectPreviewFields,
-} from "@/components/ui/project-hover-preview";
+} from "@/components/sections/projects/project-hover-preview";
 import {
   PROJECT_CARD_MEDIA,
   PROJECT_CARD_SHELL,
-} from "@/components/ui/project-card-shell";
+} from "@/components/sections/projects/project-card-shell";
 
 interface ProjectCardProps
   extends ProjectPreviewFields,

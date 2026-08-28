@@ -332,6 +332,50 @@ export function Highlight({
 }
 
 /* ------------------------------------------------------------------ */
+/*  split-text reveal                                                 */
+/* ------------------------------------------------------------------ */
+/*
+ * The paragraph's children are plain copy interleaved with <Highlight>
+ * elements. To reveal word-by-word, plain string children are split on
+ * whitespace (spaces pass through un-animated, so line-wrapping still
+ * happens naturally); each <Highlight> is kept as one atomic token so it
+ * never gets torn apart. Every token is wrapped in a motion.span sharing
+ * one stagger container, so the whole sentence plays once on mount.
+ */
+
+/** Flatten children into word / whitespace strings and element tokens. */
+function splitIntoTokens(children: React.ReactNode): React.ReactNode[] {
+  const tokens: React.ReactNode[] = [];
+  React.Children.forEach(children, (child) => {
+    if (typeof child === "string") {
+      for (const part of child.split(/(\s+)/)) {
+        if (part.length > 0) tokens.push(part);
+      }
+    } else if (child != null && child !== false) {
+      tokens.push(child);
+    }
+  });
+  return tokens;
+}
+
+const revealContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.045, delayChildren: 0.05 },
+  },
+};
+
+const revealWord: Variants = {
+  hidden: { opacity: 0, y: "0.55em", filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+/* ------------------------------------------------------------------ */
 /*  AnimatedHighlightText                                             */
 /* ------------------------------------------------------------------ */
 export interface AnimatedHighlightTextProps
@@ -345,6 +389,7 @@ export interface AnimatedHighlightTextProps
 /**
  * A typographic block that mixes plain copy with {@link Highlight} spans.
  * Each highlight carries an icon that redraws its own strokes on hover / focus.
+ * The whole block reveals word-by-word once, on mount.
  */
 export default function AnimatedHighlightText({
   children,
@@ -352,15 +397,48 @@ export default function AnimatedHighlightText({
   className,
   ...props
 }: AnimatedHighlightTextProps) {
+  const reduce = useReducedMotion();
+  const MotionTag = motion(Tag as React.ElementType);
+  const tokens = React.useMemo(() => splitIntoTokens(children), [children]);
+
+  if (reduce) {
+    return (
+      <Tag
+        className={cn(
+          "max-w-2xl text-pretty text-[2rem] leading-tight leading-relaxed text-muted-foreground md:text-[2rem] leading-tight",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </Tag>
+    );
+  }
+
   return (
-    <Tag
+    <MotionTag
       className={cn(
         "max-w-2xl text-pretty text-[2rem] leading-tight leading-relaxed text-muted-foreground md:text-[2rem] leading-tight",
         className,
       )}
+      variants={revealContainer}
+      initial="hidden"
+      animate="visible"
       {...props}
     >
-      {children}
-    </Tag>
+      {tokens.map((token, i) =>
+        typeof token === "string" && /^\s+$/.test(token) ? (
+          token
+        ) : (
+          <motion.span
+            key={i}
+            variants={revealWord}
+            className="inline-block will-change-transform"
+          >
+            {token}
+          </motion.span>
+        ),
+      )}
+    </MotionTag>
   );
 }

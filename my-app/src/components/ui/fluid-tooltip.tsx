@@ -159,7 +159,7 @@ export function FluidTooltip({
             id={tipId}
             aria-hidden={!active}
             className={cn(
-              "pointer-events-none absolute z-50 block -translate-x-1/2 whitespace-nowrap",
+              "pointer-events-none absolute z-50 block -translate-x-1/2",
               side === "top" ? "bottom-full" : "top-full",
             )}
             style={{ left }}
@@ -201,7 +201,7 @@ export function FluidTooltip({
             >
               <motion.span
                 className={cn(
-                  "relative block overflow-hidden rounded-2xl border border-white/70 bg-white/85 px-4 py-2.5 text-sm text-foreground shadow-[0_12px_40px_-12px_rgba(0,0,0,0.28)] backdrop-blur-md",
+                  "relative block w-[240px] overflow-hidden rounded-2xl border border-white/70 bg-white/85 px-4 py-2.5 text-sm text-foreground shadow-[0_12px_40px_-12px_rgba(0,0,0,0.28)] backdrop-blur-md",
                   tooltipClassName,
                 )}
                 initial={{ filter: reduce ? "blur(0px)" : "blur(4px)" }}

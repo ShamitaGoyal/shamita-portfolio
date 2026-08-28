@@ -15,9 +15,9 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { FolderIntro } from "@/components/ui/folder-intro";
-import { ProjectCard } from "@/components/ui/project-card";
-import { VideoProjectCard } from "@/components/ui/video-project-card";
+import { FolderIntro } from "@/components/sections/projects/folder-intro";
+import { ProjectCard } from "@/components/sections/projects/project-card";
+import { VideoProjectCard } from "@/components/sections/projects/video-project-card";
 import {
   PROJECT_FOLDERS,
   type ProjectEntry,

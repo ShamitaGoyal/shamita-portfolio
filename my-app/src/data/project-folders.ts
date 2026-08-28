@@ -1,4 +1,4 @@
-import type { ProjectPreviewFields } from "@/components/ui/project-hover-preview";
+import type { ProjectPreviewFields } from "@/components/sections/projects/project-hover-preview";
 
 export type VideoProjectEntry = ProjectPreviewFields & {
   type: "video";

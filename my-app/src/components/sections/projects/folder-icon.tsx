@@ -21,7 +21,7 @@ export function FolderIcon({ name, onOpen, className }: FolderIconProps) {
       )}
     >
       <Image
-        src="/folder.png"
+        src="/images/folder.png"
         alt=""
         width={120}
         height={96}
