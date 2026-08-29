@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { HashScrollOnLoad } from "@/components/layout/hash-scroll-on-load";
 import { SiteHeader } from "@/components/layout/site-header";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/next';
 
 
 const ppMondwest = localFont({
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SiteHeader />
           <HashScrollOnLoad />
           {children}
+          <Analytics />
       </body>
     </html>
   );
