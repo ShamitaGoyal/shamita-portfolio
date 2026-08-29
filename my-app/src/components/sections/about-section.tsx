@@ -29,20 +29,24 @@ export function AboutSection() {
 
           <div className="mt-6 space-y-4 font-[family-name:var(--font-mondwest)] text-base leading-relaxed sm:text-lg">
             <p>
-              I&apos;m a designer and developer who loves building products that
-              feel thoughtful, polished, and easy to use. I care about the small
-              details — from micro-interactions to typography — that make an
-              experience feel alive.
+            I'm a recent new grad from the University of California, 
+            San Diego, where I studied Cognitive Science with a 
+            specialization in Human-Computer Interaction and Design.
+             I'm passionate about software development, interface design, 
+             and building digital experiences that are both functional 
+             and thoughtfully designed.
             </p>
             <p>
-              My work spans interface design, frontend development, and creative
-              video projects. I enjoy collaborating with teams who value craft and
-              user-centered thinking.
+            I've always been drawn to creating 
+            things—from art and design to coding and 
+            web development. Today, I channel that 
+            curiosity into building software, developing 
+            responsive interfaces, and exploring 
+            how thoughtful design can make technology 
+            easier and more enjoyable to use.
             </p>
             <p>
-              When I&apos;m not designing, you&apos;ll find me experimenting with
-              motion graphics, collecting Smiskis, or exploring new tools to push
-              what&apos;s possible on the web.
+            When I'm not coding or designing, you'll probably find me cooking, drawing, listening to music, or taking photos with my digital camera.
             </p>
           </div>
         </div>

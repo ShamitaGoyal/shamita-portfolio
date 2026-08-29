@@ -196,7 +196,7 @@ export const PROJECT_FOLDERS: ProjectFolder[] = [
   },
   {
     id: "data-science",
-    name: "Data Science",
+    name: "DS3",
     intro: {
       title: "Data Science Student Society",
       projectRole: "Designer & Frontend Engineer",
