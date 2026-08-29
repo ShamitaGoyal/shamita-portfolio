@@ -56,6 +56,10 @@ export function FinderWindow({
   onClose,
   onSelectFolder,
 }: FinderWindowProps) {
+  const folderIndex = PROJECT_FOLDERS.findIndex((item) => item.id === folder.id);
+  const prevFolder = PROJECT_FOLDERS[folderIndex - 1];
+  const nextFolder = PROJECT_FOLDERS[folderIndex + 1];
+
   useEffect(() => {
     if (!open) return;
 
@@ -107,17 +111,44 @@ export function FinderWindow({
                 <span className="size-3 rounded-full bg-[#28c840]" />
               </div>
 
-              <div className="hidden items-center gap-1 sm:flex">
-                <span className="flex size-7 items-center justify-center rounded-md bg-white/70 text-[#888]">
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  aria-label="Previous folder"
+                  disabled={!prevFolder}
+                  onClick={() => prevFolder && onSelectFolder(prevFolder.id)}
+                  className="flex size-7 items-center justify-center rounded-md bg-white/70 text-[#888] transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+                >
                   <ChevronLeft className="size-4" />
-                </span>
-                <span className="flex size-7 items-center justify-center rounded-md bg-white/70 text-[#888]">
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next folder"
+                  disabled={!nextFolder}
+                  onClick={() => nextFolder && onSelectFolder(nextFolder.id)}
+                  className="flex size-7 items-center justify-center rounded-md bg-white/70 text-[#888] transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+                >
                   <ChevronRight className="size-4" />
-                </span>
+                </button>
               </div>
 
               <div className="flex min-w-0 flex-1 items-center justify-center">
-                <span className="truncate text-sm font-medium text-[#333]">
+                <label className="sr-only sm:hidden" htmlFor="finder-folder-select">
+                  Select project folder
+                </label>
+                <select
+                  id="finder-folder-select"
+                  value={folder.id}
+                  onChange={(event) => onSelectFolder(event.target.value)}
+                  className="max-w-full truncate rounded-md border-none bg-transparent px-2 py-1 text-center text-sm font-medium text-[#333] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#007aff]/50 sm:hidden"
+                >
+                  {PROJECT_FOLDERS.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+                <span className="hidden truncate text-sm font-medium text-[#333] sm:block">
                   {folder.name}
                 </span>
               </div>
@@ -164,20 +195,52 @@ export function FinderWindow({
                     title={folder.intro.title}
                     summary={folder.intro.summary}
                     projectRole={folder.intro.projectRole}
+                    date={
+                      folder.intro.year !== undefined
+                        ? String(folder.intro.year)
+                        : undefined
+                    }
                   />
 
-                  <div className="grid grid-cols-1 gap-8 px-6 py-8 sm:grid-cols-2 sm:px-8">
-                    {folder.projects.map((project) => (
-                      <ProjectEntryCard
-                        key={
-                          project.type === "video"
-                            ? project.id
-                            : project.title
-                        }
-                        project={project}
-                      />
-                    ))}
-                  </div>
+                  {folder.sections ? (
+                    folder.sections.map((section) => (
+                      <section key={section.id}>
+                        <FolderIntro
+                          title={section.title}
+                          date={section.date}
+                          summary={section.summary}
+                          projectRole={section.projectRole}
+                          className="border-t border-b-0 bg-transparent px-6 pt-6 pb-0 sm:px-8"
+                        />
+
+                        <div className="grid grid-cols-1 gap-8 px-6 py-8 sm:grid-cols-2 sm:px-8">
+                          {section.projects.map((project) => (
+                            <ProjectEntryCard
+                              key={
+                                project.type === "video"
+                                  ? project.id
+                                  : project.title
+                              }
+                              project={project}
+                            />
+                          ))}
+                        </div>
+                      </section>
+                    ))
+                  ) : (
+                    <div className="grid grid-cols-1 gap-8 px-6 py-8 sm:grid-cols-2 sm:px-8">
+                      {folder.projects.map((project) => (
+                        <ProjectEntryCard
+                          key={
+                            project.type === "video"
+                              ? project.id
+                              : project.title
+                          }
+                          project={project}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-1.5 border-t border-[#e5e5e5] bg-[#fafafa] px-4 py-2 text-[0.7rem] text-[#666]">

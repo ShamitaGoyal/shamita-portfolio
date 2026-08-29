@@ -27,7 +27,7 @@ export function SiteHeader() {
           className="flex items-center gap-1 p-5.5 text-3xl"
           aria-label="Home"
         >
-          sg
+          sg ⏾⋆.˚
         </Link>
 
         <div className="flex justify-center max-[486px]:hidden">

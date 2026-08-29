@@ -24,7 +24,7 @@ export function AboutSection() {
 
         <div className="lg:w-[55%]">
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Hi! I&apos;m Shamita.
+            Hi! I&apos;m Shamita ⊹ ࣪ ˖⏾⋆.˚
           </h1>
 
           <div className="mt-6 space-y-4 font-[family-name:var(--font-mondwest)] text-base leading-relaxed sm:text-lg">

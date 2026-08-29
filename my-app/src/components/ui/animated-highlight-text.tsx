@@ -185,8 +185,8 @@ export interface HighlightProps
   extends Omit<React.HTMLAttributes<HTMLSpanElement>, "color"> {
   /** The word(s) that light up. */
   children: React.ReactNode;
-  /** One of the animated icon components (or any node) shown inline. */
-  icon: React.ReactNode;
+  /** One of the animated icon components (or any node) shown inline. Omit for a plain hover-image highlight with no icon/draw animation. */
+  icon?: React.ReactNode;
   /** Accent color for the text + icon (any CSS color). */
   color?: string;
   /** Icon side, relative to the text. */

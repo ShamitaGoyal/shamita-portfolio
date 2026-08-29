@@ -1,10 +1,11 @@
 import { ArrowUpRight, Calendar } from "lucide-react";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export type ProjectPreviewFields = {
   title: string;
-  projectRole: string;
-  description: string;
+  projectRole?: string;
+  description: ReactNode;
   year: string | number;
   tags?: readonly string[];
   href?: string;
@@ -45,9 +46,9 @@ export function ProjectHoverPreview({
           ) : null}
         </div>
 
-        <p className="line-clamp-3 text-sm leading-relaxed text-white/95">
+        <div className="line-clamp-3 text-sm leading-relaxed text-white/95">
           {description}
-        </p>
+        </div>
 
         <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
           <div className="flex items-center gap-1.5 text-xs text-white/70">
