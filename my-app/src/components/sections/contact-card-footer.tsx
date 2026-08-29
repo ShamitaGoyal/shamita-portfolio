@@ -36,7 +36,7 @@ export function ContactCardFooter() {
           </li>
 
           <li className="hover:text-gray-500 transition-colors duration-300">
-            <Link href="/resume.pdf" target="_blank">
+            <Link href="/shamita-resume.pdf" target="_blank">
               RESUME
             </Link>
           </li>
